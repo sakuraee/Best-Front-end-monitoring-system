@@ -30,6 +30,11 @@ const routes = [
                 path: '/performance',
                 name: 'performance',
                 component: () => import('../views/Performance')
+            },
+            {
+                path: '/bigscreen',
+                name: 'bigscreen',
+                component: () => import('../views/bigscreen')
             }
         ]
     },

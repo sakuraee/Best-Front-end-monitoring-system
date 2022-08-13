@@ -8,22 +8,27 @@
     @open="handleOpen"
     @close="handleClose"
     :collapse="isCollapse"
+    :router="true"
   >
     <h3>前端性能监控系统</h3>
     <el-menu-item
-      @click="clickMenu(item)"
       v-for="item in noChildren"
       :index="index.path + ''"
       :key="item.path"
+      @click="clickMenu(item)"
     >
       <i :class="'el-icon-' + item.icon"></i>
       <span slot="title">{{ item.label }}</span>
     </el-menu-item>
 
     <!-- <el-menu-item @click="clickMenu(item)" index="1">
-    <i class="el-icon-menu"></i>
-    <span slot="title">数据概览</span>
-  </el-menu-item> -->
+      <i class="el-icon-menu"></i>
+      <span slot="title">数据</span>
+    </el-menu-item> -->
+    <el-menu-item index="/bigscreen">
+      <i class="el-icon-setting"></i>
+      <span slot="title">数据概览</span>
+    </el-menu-item>
 
     <el-submenu
       v-for="item in hasChildren"
@@ -50,12 +55,10 @@
       </el-menu-item-group>
     </el-submenu>
 
-    <!-- <el-submenu index="3">
-      <template slot="title">
-        <i class="el-icon-document"></i>
-        <span slot="title">性能数据</span>
-      </template>
-    </el-submenu> -->
+    <el-menu-item index="/performance">
+      <i class="el-icon-setting"></i>
+      <span slot="title">性能数据</span>
+    </el-menu-item>
 
     <el-submenu index="4">
       <template slot="title">
@@ -79,7 +82,7 @@
       </el-menu-item-group>
     </el-submenu>
 
-    <el-menu-item index="6">
+    <el-menu-item index="/user">
       <i class="el-icon-setting"></i>
       <span slot="title">用户管理</span>
     </el-menu-item>
@@ -121,10 +124,17 @@ export default {
         {
           path: "/",
           name: "home",
-          label: "数据概览",
+          label: "首页",
           icon: "s-home",
           url: "Home/home",
         },
+        // {
+        //   path: "/bigscreen",
+        //   name: "bigscreen",
+        //   label: "数据概览",
+        //   icon: "location",
+        //   url: "Bigscreen/bigscreen",
+        // },
         {
           label: "异常数据",
           icon: "location",
@@ -163,13 +173,13 @@ export default {
             },
           ],
         },
-        {
-          path: "/performance",
-          name: "performance",
-          label: "性能数据",
-          icon: "location",
-          url: "Performance/performance",
-        },
+        // {
+        //   path: "/performance",
+        //   name: "performance",
+        //   label: "性能数据",
+        //   icon: "location",
+        //   url: "Performance/performance",
+        // },
       ],
     };
   },

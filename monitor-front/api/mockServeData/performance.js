@@ -58,7 +58,7 @@ export default {
                 },
                 tableData: [
                     {
-                        filename: 'file1.css',
+                        filename: '页面一',
                         totalCount: 5,
                         pageCount: 3,
                         time: '2022-08-01 12:12:12'
@@ -68,19 +68,19 @@ export default {
                     // pageCount:3,
                     // time
                     {
-                        filename: 'file2.html',
+                        filename: '页面二',
                         totalCount: 6,
                         pageCount: 3,
                         time: '2022-08-05 12:12:12'
                     },
                     {
-                        filename: 'file3.js',
+                        filename: '页面三',
                         totalCount: 3,
                         pageCount: 3,
                         time: '2022-08-05 12:12:12'
                     },
                     {
-                        filename: 'file1.css',
+                        filename: '页面四',
                         totalCount: 7,
                         pageCount: 3,
                         time: '2022-08-02 12:12:12'

@@ -6,10 +6,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from '../router'
 import http from 'axios'
 import '../api/mock.js'
+import dataV from '@jiaminghi/data-view'
 
+Vue.use(dataV)
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-Vue.prototype.$http=http
+Vue.prototype.$http = http
 
 new Vue({
   router,
