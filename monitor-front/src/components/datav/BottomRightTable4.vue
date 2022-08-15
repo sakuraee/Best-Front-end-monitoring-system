@@ -15,12 +15,12 @@ export default {
     return {
       config: {
         data: [
-          ["收费广场", "月累计：4起"],
-          ["外场道路", "月累计：3起"],
-          ["运维分中心", "月累计：3起"],
-          ["服务区", "月累计：3起"],
-          ["备件库房", "月累计：2起"],
-          ["其他", "月累计：1起"],
+          ["web", "7566"],
+          ["Android 6.0.1", "5646"],
+          ["ios 9.1", "4334"],
+          ["ios 10.1", "3454"],
+          ["ios 13.2.3", "2786"],
+          ["Android 9.0", "123"],
         ],
         index: true,
         columnWidth: [30, 100],
@@ -40,7 +40,7 @@ export default {
   margin: 0 -5px;
 
   .border-box-content {
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
   }
 

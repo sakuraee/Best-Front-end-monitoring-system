@@ -5,19 +5,18 @@
         <div class="mh-middle">前端监控系统</div>
         <div class="mh-right" style="float: right">
           <el-link type="info" @click="back" :underline="false">退出</el-link>
-
-          <!-- <dv-border-box-2
-            style="
-              width: 120px;
-              height: 50px;
-              line-height: 50px;
-              text-align: center;
-              margin-left: 0px;
-            "
-          >
-            核心数据
-          </dv-border-box-2> -->
         </div>
+        <dv-border-box-2
+          style="
+            width: 110px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            margin-left: 0px;
+          "
+        >
+          按F11全屏
+        </dv-border-box-2>
       </div>
 
       <dv-border-box-1 class="main-container">
@@ -124,7 +123,7 @@ export default {
       font-size: 30px;
       justify-content: center;
       align-items: center;
-      margin-left: 500px;
+      margin-left: 480px;
     }
 
     .mh-right {

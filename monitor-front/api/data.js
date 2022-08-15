@@ -13,8 +13,9 @@ export const getMenu = (param) => {
 
 export const getData = () => {
     return axios.request({
-        url: '/srcError/getData'
-
+        url: '/srcError/getData',
+        methods: 'get',
+        // data: param
     })
 
 }

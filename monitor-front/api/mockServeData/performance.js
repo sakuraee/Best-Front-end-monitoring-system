@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 
 let List = []
+
 export default {
     getlineData: () => {
         for (let i = 0; i < 8; i++) {
@@ -17,73 +18,114 @@ export default {
         return {
             code: 20000,
             data: {
-                //柱状图
-                barData: [
+                //性能卡片
+                countData: [
                     {
-                        date: '2022-08-11 0:00',
-                        count: 12
+                        name: "DNS解析时间",
+                        value: 0,
+                        //   icon: "el-icon-success",
+                        //   color: "#2ec7c9",
                     },
                     {
-                        date: '2022-08-11 3:00',
-                        count: 13
+                        name: "TCP连接时间",
+                        value: 0,
+                        //   icon: "el-icon-star-on",
+                        //   color: "#ffb980",
                     },
                     {
-                        date: '2022-08-11 6:00',
-                        count: 11
+                        name: "TTFB平均时间",
+                        value: 0.15,
+                        //   icon: "el-icon-user",
+                        //   color: "#ffb980",
                     },
                     {
-                        date: '2022-08-11 9:00',
-                        count: 12
+                        name: "Dom解析时间",
+                        value: 2.58,
+                        //   icon: "el-icon-star-on",
+                        //   color: "#ffb980",
                     },
                     {
-                        date: '2022-08-11 12:00',
-                        count: 9
+                        name: "页面平均加载时间",
+                        value: 2.74,
+                        //   icon: "el-icon-user",
+                        //   color: "#ffb980",
                     },
-                    {
-                        date: '2022-08-11 15:00',
-                        count: 9
-                    },
-                    {
-                        date: '2022-08-11 18:00',
-                        count: 8
-                    },
-                    {
-                        date: '2022-08-11 21:00',
-                        count: 9
-                    }
                 ],
                 orderData: {
                     date: ['08-11 0:00', '08-11 3:00', '08-11 6:00', '08-11 9:00', '08-11 12:00', '08-11 15:00', '08-11 18:00', '08-11 21:00'],
                     data: List
                 },
+                barData: [
+                    {
+                        date: 'FP',
+                        new: Mock.Random.float(1, 40),
+
+                    },
+                    {
+                        date: 'FCP',
+                        new: Mock.Random.float(0, 100),
+                    },
+                    {
+                        date: 'domReady',
+                        new: Mock.Random.float(1, 200),
+                    },
+                    {
+                        date: 'ssl',
+                        new: Mock.Random.float(1, 200),
+                    },
+                    {
+                        date: 'TCP连接',
+                        new: Mock.Random.float(1, 40),
+
+                    },
+                    {
+                        date: 'DNS解析',
+                        new: Mock.Random.float(0, 10),
+                    },
+                    {
+                        date: '发起请求',
+                        new: Mock.Random.float(1, 200),
+                    },
+                    {
+                        date: '请求响应',
+                        new: Mock.Random.float(1, 200),
+                    },
+                    {
+                        date: 'DOM解析',
+                        new: Mock.Random.float(1, 200),
+                    },
+                    {
+                        date: '页面加载',
+                        new: Mock.Random.float(1, 200),
+                    }
+                ],
                 tableData: [
                     {
-                        filename: '页面一',
-                        totalCount: 5,
-                        pageCount: 3,
-                        time: '2022-08-01 12:12:12'
-
+                        filename: '接口一',
+                        totalCount: Mock.Random.float(1, 20, 0, 4),
+                        pageCount: Mock.Random.integer(1, 50),
+                        time: Mock.Random.integer(1, 10),
                     },
                     //     totalCount:9,
                     // pageCount:3,
                     // time
                     {
-                        filename: '页面二',
-                        totalCount: 6,
-                        pageCount: 3,
-                        time: '2022-08-05 12:12:12'
+                        filename: '接口二',
+                        totalCount: Mock.Random.float(1, 20, 0, 4),
+                        pageCount: Mock.Random.integer(1, 50),
+                        time: Mock.Random.integer(1, 10),
                     },
                     {
-                        filename: '页面三',
-                        totalCount: 3,
-                        pageCount: 3,
-                        time: '2022-08-05 12:12:12'
+                        filename: '接口三',
+                        totalCount: Mock.Random.float(1, 20, 0, 4),
+                        pageCount: Mock.Random.integer(1, 50),
+                        time: Mock.Random.integer(1, 10),
                     },
                     {
-                        filename: '页面四',
-                        totalCount: 7,
-                        pageCount: 3,
-                        time: '2022-08-02 12:12:12'
+                        filename: '接口四',
+                        totalCount: Mock.Random.float(1, 20, 0, 4),
+                        pageCount: Mock.Random.integer(1, 50),
+                        time: Mock.Random.integer(1, 10),
                     }
                 ]
             }

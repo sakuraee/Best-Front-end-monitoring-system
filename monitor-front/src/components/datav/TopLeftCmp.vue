@@ -2,7 +2,7 @@
   <div class="top-left-cmp">
     <div class="dc-left">
       <dv-border-box-5>
-        <div class="main-value"><span>125</span></div>
+        <div class="main-value"><span>95</span></div>
         <!-- <div class="compare-value"><span>较昨日</span>0.81%</div> -->
         <!-- <div class="compare-value"><span>环比</span>15</div> -->
       </dv-border-box-5>

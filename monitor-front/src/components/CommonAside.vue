@@ -10,7 +10,7 @@
     :collapse="isCollapse"
     :router="true"
   >
-    <h3>前端性能监控系统</h3>
+    <h3>{{ isCollapse ? "后台" : "前端性能监控系统" }}</h3>
     <el-menu-item
       v-for="item in noChildren"
       :index="index.path + ''"
@@ -86,13 +86,12 @@
       <i class="el-icon-setting"></i>
       <span slot="title">用户管理</span>
     </el-menu-item>
-
     <el-menu-item index="6"> </el-menu-item>
     <el-menu-item index="6"> </el-menu-item>
+    <!-- <el-menu-item index="6"> </el-menu-item>
     <el-menu-item index="6"> </el-menu-item>
     <el-menu-item index="6"> </el-menu-item>
-    <el-menu-item index="6"> </el-menu-item>
-    <el-menu-item index="6"> </el-menu-item>
+    <el-menu-item index="6"> </el-menu-item> -->
   </el-menu>
 </template>
 
@@ -119,7 +118,6 @@ export default {
     return {
       index: 0,
       label: "默认",
-      isCollapse: false,
       menu: [
         {
           path: "/",
@@ -138,9 +136,6 @@ export default {
         {
           label: "异常数据",
           icon: "location",
-          // name:'errorData',
-          // path:'/errorData',
-          // url:'ErrorData/ErrorData',
           children: [
             {
               path: "/jsError",
@@ -173,13 +168,6 @@ export default {
             },
           ],
         },
-        // {
-        //   path: "/performance",
-        //   name: "performance",
-        //   label: "性能数据",
-        //   icon: "location",
-        //   url: "Performance/performance",
-        // },
       ],
     };
   },
@@ -202,6 +190,9 @@ export default {
     },
     hasChildren() {
       return this.menu.filter((item) => item.children);
+    },
+    isCollapse() {
+      return this.$store.state.tab.isCollapse;
     },
   },
 };

@@ -2,32 +2,123 @@
   <!-- <div>性能数据页面</div> -->
 
   <el-row class="performance" :gutter="0" justify="space-between">
-    <el-col
-      v-for="item in countData"
-      :key="item.name"
-      :offset="1"
-      :body-style="{ display: 'flex', padding: 0, border: 0 }"
-      style="margin-top: 10px"
-      :span="3.8"
-      justify="space-between"
-    >
-      <div class="num">
-        <el-card>
-          <i class="el-icon-question"></i>
-          <div class="detail">
-            <p class="value">{{ item.value }}</p>
-            <p class="txt">{{ item.name }}</p>
-          </div>
-        </el-card>
-      </div>
-    </el-col>
     <el-col :span="24" style="margin-top: 20px">
       <div class="graph">
-        <el-card style="height: 408px">
-          <div style="height: 408px" ref="Linecharts"></div>
+        <el-card style="height: 608px">
+          <el-col
+            v-for="item in countData"
+            :key="item.name"
+            :offset="1"
+            :body-style="{ display: 'flex', padding: 0, border: 0 }"
+            style="margin-top: 0px"
+            :span="3.8"
+            justify="space-between"
+          >
+            <div class="num">
+              <el-card>
+                <div class="detail">
+                  <p class="txt">
+                    {{ item.name }}
+                  </p>
+                  <p class="value">
+                    {{ item.value + "s" }}
+                  </p>
+                </div>
+              </el-card>
+            </div>
+          </el-col>
+          <div style="height: 408px; margin-top: 200px" ref="Linecharts"></div>
         </el-card>
       </div>
       <!-- </el-card> -->
+    </el-col>
+    <el-col :span="24" style="margin-top: 20px">
+      <div class="table">
+        <el-card style="height: 500px">
+          <el-tabs :tab-position="'left'" style="height: 500px">
+            <el-tab-pane :lazy="true">
+              <span slot="label">
+                http://localhost:8080/performance<i
+                  class="el-icon-caret-right"
+                ></i
+              ></span>
+              <el-row>
+                <el-col :span="24" style="margin-top: 10px">
+                  <div>
+                    <el-col
+                      :offset="1"
+                      :body-style="{
+                        display: 'flex',
+                        padding: 0,
+                        border: 0,
+                      }"
+                      style="margin-top: 0px"
+                      :span="3.8"
+                      justify="space-between"
+                    >
+                      <div class="metric">
+                        <el-card>
+                          <div class="card">
+                            <p class="txtc">平均网络耗时</p>
+                            <p class="valuec">
+                              {{ 6.83 + "s" }}
+                            </p>
+                          </div>
+                        </el-card>
+                      </div>
+                    </el-col>
+                    <el-col
+                      :offset="1"
+                      :body-style="{
+                        display: 'flex',
+                        padding: 0,
+                        border: 0,
+                      }"
+                      style="margin-top: 0px"
+                      :span="3.8"
+                      justify="space-between"
+                    >
+                      <div class="metric">
+                        <el-card>
+                          <div class="card">
+                            <p class="txtc">影响用户数</p>
+                            <p class="valuec">39</p>
+                          </div>
+                        </el-card>
+                      </div>
+                    </el-col>
+                  </div>
+                </el-col>
+              </el-row>
+              <div
+                style="height: 358px; margin-top: 20px"
+                ref="barEcharts"
+              ></div>
+            </el-tab-pane>
+            <el-tab-pane
+              ><span slot="label">
+                http://localhost:8080/bigscreen<i
+                  class="el-icon-caret-right"
+                ></i></span
+              >http://localhost:8080/bigscreen</el-tab-pane
+            >
+            <el-tab-pane label="http://localhost:8080/home"
+              ><span slot="label">
+                http://localhost:8080/home<i
+                  class="el-icon-caret-right"
+                ></i></span
+              >http://localhost:8080/home</el-tab-pane
+            >
+            <el-tab-pane label="http://localhost:8080/user"
+              ><span slot="label">
+                http://localhost:8080/user<i
+                  class="el-icon-caret-right"
+                ></i></span
+              >http://localhost:8080/user</el-tab-pane
+            >
+          </el-tabs>
+        </el-card>
+      </div>
     </el-col>
     <el-row>
       <el-col>
@@ -48,23 +139,44 @@
 </template>
 
 <style>
+.item {
+  margin: 4px;
+}
+.card {
+  height: 40px;
+  width: 110px;
+  /* vertical-align: middle; */
+  align-items: center;
+  justify-content: center;
+}
+
+.detail {
+  width: 110px;
+  height: 80px;
+}
 .value {
   font-size: 26px;
   font-family: 微软雅黑;
 }
+
 .txt {
-  font-size: 17px;
+  font-size: 13px;
   font-family: 微软雅黑;
   color: #000;
 }
-/* .num{
-
-    color: aquamarine;
-} */
+.valuec {
+  font-size: 10px;
+  font-family: 微软雅黑;
+}
+.txtc {
+  font-size: 15px;
+  font-family: 微软雅黑;
+  color: #000;
+}
 </style>
 
 <script>
-import { getData, getPerf } from "../../api/data.js";
+import { getPerf } from "../../api/data.js";
 import * as echarts from "echarts";
 // import { it } from 'node:test'
 
@@ -73,68 +185,19 @@ export default {
   data() {
     return {
       userImg: require("../../src/assets/logo.png"),
-      tableData: [
-        {
-          filename: "text1.css",
-          totalCount: 9,
-          pageCount: 3,
-          time: "2022-08-06 23:11:24",
-        },
-        {
-          filename: "text2.css",
-          totalCount: 4,
-          pageCount: 1,
-          time: "2022-08-06 15:12:11",
-        },
-        {
-          filename: "text3.css",
-          totalCount: 5,
-          pageCount: 2,
-          time: "2022-08-09 17:16:21",
-        },
-      ],
+      activeName: "first",
+      tableData: [],
       tableLabel: {
-        filename: "页面列表",
-        totalCount: "发生次数",
-        pageCount: "发生页面数",
-        time: "发生时间",
+        filename: "接口列表",
+        totalCount: "平均网络耗时(s)",
+        pageCount: "影响用户数",
+        time: "发生页面",
       },
 
       // totalCount:'总发生次数',
       // pageCount:'影响页面次数',
       // userCount:'影响用户数'
-      countData: [
-        {
-          name: "DNS解析时间",
-          value: 0,
-          //   icon: "el-icon-success",
-          //   color: "#2ec7c9",
-        },
-        {
-          name: "TCP连接时间",
-          value: 0,
-          //   icon: "el-icon-star-on",
-          //   color: "#ffb980",
-        },
-        {
-          name: "TTFB平均时间",
-          value: 158.91,
-          //   icon: "el-icon-user",
-          //   color: "#ffb980",
-        },
-        {
-          name: "Dom解析时间",
-          value: 2.58,
-          //   icon: "el-icon-star-on",
-          //   color: "#ffb980",
-        },
-        {
-          name: "页面平均加载时间",
-          value: 2.74,
-          //   icon: "el-icon-user",
-          //   color: "#ffb980",
-        },
-      ],
+      // barData: [],
     };
   },
   mounted() {
@@ -143,25 +206,12 @@ export default {
       if (code === 20000) {
         //表格数据
         this.tableData = data.tableData;
-
+        this.countData = data.countData;
         const order = data.orderData;
-        console.log(order);
         const xData = order.date;
-        // const xData = ['2022-08-01',
-        //         '2022-08-02',
-        //         '2022-08-03',
-        //         '2022-08-04',
-        //         '2022-08-05']
         const keyArray = Object.keys(order.data[0]);
-        // const keyArray = ['数量']
-        // const series = [
-        //     {
-        //         name:'数量',
-        //         type:'bar',
-        //         data:[12,9,11,8,7]
-        //     }
-        // ]
         const series = [];
+        console.log(data);
         keyArray.forEach((key) => {
           series.push({
             name: key,
@@ -184,55 +234,73 @@ export default {
         const E = echarts.init(this.$refs.Linecharts);
         E.setOption(option);
 
-        //柱状图
-        //   const barOption = {
-        //     legend: {
-        //       //图例文字颜色
-        //       textStyle: {
-        //         color: "#333",
-        //       },
-        //     },
-        //     grid: {
-        //       left: "10%",
-        //     },
-        //     //提示框
-        //     tooltip: {
-        //       trigger: "axis",
-        //     },
-        //     xAxis: {
-        //       type: "category", //类目轴
-        //       data: data && data.barData && data.barData.map((item) => item.date),
-        //       axisLine: {
-        //         lineStyle: {
-        //           color: "#17b3a3",
-        //         },
-        //       },
-        //       axisLabel: {
-        //         interval: 0,
-        //         color: "#333",
-        //       },
-        //     },
-        //     yAxis: [
-        //       {
-        //         type: "value",
-        //         axisLine: {
-        //           linestyle: {
-        //             color: "#17b3a3",
-        //           },
-        //         },
-        //       },
-        //     ],
-        //     color: ["#2ec7c9", "#b6a2de"],
-        //     series: [
-        //       {
-        //         name: "资源异常报错数量",
-        //         data: data.barData && data.barData.map((item) => item.count),
-        //         type: "bar",
-        //       },
-        //     ],
-        //   };
-        //   const U = echarts.init(this.$refs.barEcharts);
-        //   U.setOption(barOption);
+        const barOption = {
+          legend: {
+            //图例文字颜色
+            textStyle: {
+              color: "#333",
+            },
+          },
+          grid: {
+            left: "10%",
+          },
+          //提示框
+          tooltip: {
+            trigger: "axis",
+          },
+          xAxis: {
+            type: "category", //类目轴
+            data: data && data.barData && data.barData.map((item) => item.date),
+            axisLine: {
+              lineStyle: {
+                color: "#17b3a3",
+              },
+            },
+            axisLabel: {
+              interval: 0,
+              color: "#333",
+            },
+          },
+          yAxis: [
+            {
+              type: "value",
+              axisLine: {
+                linestyle: {
+                  color: "#17b3a3",
+                },
+              },
+            },
+          ],
+          color: ["#2ec7c9", "#b6a2de"],
+          series: [
+            {
+              name: "加载计时(ms)",
+              data: data.barData && data.barData.map((item) => item.new),
+              type: "bar",
+              itemStyle: {
+                normal: {
+                  color: function (params) {
+                    // 给出颜色组
+                    var colorList = [
+                      "#cca272",
+                      "#74608f",
+                      "#d7a02b",
+                      "#c8ba23",
+                      "#a12358",
+                      "#b12358",
+                      "#d12358",
+                      "#c10258",
+                    ];
+                    //循环调用
+                    return colorList[params.dataIndex % colorList.length];
+                  },
+                },
+              },
+            },
+          ],
+        };
+        const U = echarts.init(this.$refs.barEcharts);
+        U.setOption(barOption);
       }
       console.log(res);
     });
