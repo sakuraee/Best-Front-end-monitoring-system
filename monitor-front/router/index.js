@@ -25,6 +25,19 @@ const routes = [
                 path: '/srcError',
                 name: 'srcError',
                 component: () => import('../views/srcError')
+            }, {
+                path: '/http',
+                name: 'http',
+                component: () => import('../views/http')
+            }, {
+                path: '/apiError',
+                name: 'apiError',
+                component: () => import('../views/apiError')
+            },
+            {
+                path: '/jsError',
+                name: 'jsError',
+                component: () => import('../views/jsError')
             },
             {
                 path: '/performance',
@@ -35,7 +48,12 @@ const routes = [
                 path: '/bigscreen',
                 name: 'bigscreen',
                 component: () => import('../views/bigscreen')
-            }
+            },
+            {
+                path: '/userData',
+                name: 'userData',
+                component: () => import('../views/userData')
+            },
         ]
     },
 

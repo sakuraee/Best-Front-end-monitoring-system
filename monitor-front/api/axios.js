@@ -1,24 +1,24 @@
 import axios from 'axios'
 import config from '../config'
 
-const baseUrl = process.env.NODE_ENV ==='development' ? config.baseUrl.dev : config.baseUrl.pro
-
-class HttpRequest{
-    constructor(baseUrl){
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+console.log(baseUrl)
+class HttpRequest {
+    constructor(baseUrl) {
         this.baseUrl = baseUrl
 
     }
-    getInsideConfig(){
+    getInsideConfig() {
         const config = {
-            baseUrl:this.baseUrl,
-            header:{}
+            baseUrl: this.baseUrl,
+            header: {}
         }
         return config
     }
-    interceptors(instance){
-        instance.interceptors.request.use(function(config){
+    interceptors(instance) {
+        instance.interceptors.request.use(function (config) {
             return config;
-        },function (error){
+        }, function (error) {
             return Promise.reject(error);
         });
 
@@ -26,17 +26,17 @@ class HttpRequest{
             console.log(response, 'response')
             return response;
 
-        },function(error){
+        }, function (error) {
             console.log(error, 'error')
             return Promise.reject(error);
         });
     }
-    request(options){
+    request(options) {
         const instance = axios.create()
-        options = { ...this.getInsideConfig(), ...options}
+        options = { ...this.getInsideConfig(), ...options }
         this.interceptors(instance)
         return instance(options)
-        }
+    }
 }
 
 export default new HttpRequest(baseUrl)

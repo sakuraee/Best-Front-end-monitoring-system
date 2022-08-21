@@ -7,7 +7,6 @@
         icon="el-icon-menu"
         size="mini"
       ></el-button>
-      <h5 style="color: #fff">异常数据 / 资源异常</h5>
     </div>
     <div class="r-content">
       <el-dropdown trigger="click" size="mini">
@@ -24,6 +23,7 @@
 </template>
 
 <script>
+// import { mapstate } from "vuex";
 export default {
   name: "CommonHeader",
   data() {
@@ -36,6 +36,11 @@ export default {
       this.$store.commit("collapseMenu");
     },
   },
+  // computed: {
+  //   ...mapstate({
+  //     tags: (state) => state.tab.tabsList,
+  //   }),
+  // },
 };
 </script>
 

@@ -55,50 +55,50 @@ export default {
                     date: ['08-11 0:00', '08-11 3:00', '08-11 6:00', '08-11 9:00', '08-11 12:00', '08-11 15:00', '08-11 18:00', '08-11 21:00'],
                     data: List
                 },
-                barData: [
-                    {
-                        date: 'FP',
-                        new: Mock.Random.float(1, 40),
+                // barData: [
+                //     {
+                //         date: 'FP',
+                //         new: Mock.Random.float(1, 40),
 
-                    },
-                    {
-                        date: 'FCP',
-                        new: Mock.Random.float(0, 100),
-                    },
-                    {
-                        date: 'domReady',
-                        new: Mock.Random.float(1, 200),
-                    },
-                    {
-                        date: 'ssl',
-                        new: Mock.Random.float(1, 200),
-                    },
-                    {
-                        date: 'TCP连接',
-                        new: Mock.Random.float(1, 40),
+                //     },
+                //     {
+                //         date: 'FCP',
+                //         new: Mock.Random.float(0, 100),
+                //     },
+                //     {
+                //         date: 'domReady',
+                //         new: Mock.Random.float(1, 200),
+                //     },
+                //     {
+                //         date: 'ssl',
+                //         new: Mock.Random.float(1, 200),
+                //     },
+                //     {
+                //         date: 'TCP连接',
+                //         new: Mock.Random.float(1, 40),
 
-                    },
-                    {
-                        date: 'DNS解析',
-                        new: Mock.Random.float(0, 10),
-                    },
-                    {
-                        date: '发起请求',
-                        new: Mock.Random.float(1, 200),
-                    },
-                    {
-                        date: '请求响应',
-                        new: Mock.Random.float(1, 200),
-                    },
-                    {
-                        date: 'DOM解析',
-                        new: Mock.Random.float(1, 200),
-                    },
-                    {
-                        date: '页面加载',
-                        new: Mock.Random.float(1, 200),
-                    }
-                ],
+                //     },
+                //     {
+                //         date: 'DNS解析',
+                //         new: Mock.Random.float(0, 10),
+                //     },
+                //     {
+                //         date: '发起请求',
+                //         new: Mock.Random.float(1, 200),
+                //     },
+                //     {
+                //         date: '请求响应',
+                //         new: Mock.Random.float(1, 200),
+                //     },
+                //     {
+                //         date: 'DOM解析',
+                //         new: Mock.Random.float(1, 200),
+                //     },
+                //     {
+                //         date: '页面加载',
+                //         new: Mock.Random.float(1, 200),
+                //     }
+                // ],
                 tableData: [
                     {
                         filename: '接口一',
@@ -131,6 +131,53 @@ export default {
             }
         }
 
+    },
+    getbarData: () => {
+        return {
+            code: 20000,
+            data: {
+                barData: [
+                    {
+                        date: 'FCP',
+                        new: Mock.Random.float(1, 40),
+
+                    },
+                    {
+                        date: 'FP',
+                        new: Mock.Random.float(0, 100),
+                    },
+                    {
+                        date: '连接时间',
+                        new: Mock.Random.float(1, 200),
+                    },
+                    {
+                        date: '响应时间',
+                        new: Mock.Random.float(1, 200),
+                    },
+                    {
+                        date: 'ttfb',
+                        new: Mock.Random.float(1, 40),
+
+                    },
+                    {
+                        date: 'Dom解析时间',
+                        new: Mock.Random.float(0, 10),
+                    },
+                    {
+                        date: '内容加载时间',
+                        new: Mock.Random.float(1, 200),
+                    },
+                    {
+                        date: '首次可交互时间',
+                        new: Mock.Random.float(1, 200),
+                    },
+                    {
+                        date: '页面加载',
+                        new: Mock.Random.float(1, 200),
+                    }
+                ],
+            }
+        }
     }
 
 }

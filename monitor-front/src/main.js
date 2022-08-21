@@ -9,6 +9,7 @@ import '../api/mock.js'
 import dataV from '@jiaminghi/data-view'
 import store from '../store'
 
+
 Vue.use(dataV)
 Vue.config.productionTip = false
 Vue.use(ElementUI)

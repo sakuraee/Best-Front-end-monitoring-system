@@ -1,15 +1,7 @@
 <template>
-  <!-- <div>资源加载异常页面</div> -->
+  <!-- <div>计算用户行为数据页面</div> -->
 
-  <el-row class="srcError" :gutter="10">
-    <el-col :span="18" style="margin-top: 20px">
-      <div class="graph">
-        <el-card style="height: 408px">
-          <div style="height: 408px" ref="barEcharts"></div>
-        </el-card>
-      </div>
-    </el-col>
-
+  <el-row class="userData" :gutter="10">
     <el-col style="margin-top: 10px" :span="6">
       <div class="num">
         <el-card
@@ -20,7 +12,7 @@
           style="margin: 12px; height: 126px"
         >
           <!-- <i class="icon" :class="'el-icon-${item.icon}'" :style= "{ background: item.color }"></i> -->
-          <div class="deta">
+          <div class="detail">
             <p class="values">{{ item.value }}</p>
             <p class="txts">{{ item.name }}</p>
           </div>
@@ -28,9 +20,17 @@
       </div>
     </el-col>
 
+    <el-col :span="18" style="margin-top: 20px">
+      <div class="graph">
+        <el-card style="height: 408px">
+          <div style="height: 408px" ref="lineEcharts"></div>
+        </el-card>
+      </div>
+    </el-col>
+
     <el-row>
       <el-col>
-        <el-card style="margin-top: 20px; height: 460px">
+        <el-card style="margin-top: 10px; height: 460px; margin-left: 15px">
           <el-table :data="tableData">
             <el-table-column
               v-for="(val, key) in tableLabel"
@@ -43,51 +43,43 @@
         </el-card>
       </el-col>
     </el-row>
+    <!-- <el-col style="margin-top: 10px" :span="24">
+      <div class="num">
+        <el-card style="height: 408px">
+            <China-Map />
+        </el-card>
+      </div>
+    </el-col> -->
   </el-row>
 </template>
 
 <style>
-.values {
-  font-size: 26px;
-  font-family: 微软雅黑;
-  margin-left: 20px;
-}
-.txts {
-  font-size: 17px;
-  font-family: 微软雅黑;
-  color: #4c4e4e;
-  margin-left: 20px;
-}
 /* .num{
 
     color: aquamarine;
 } */
-.deta {
-  width: 200px;
-}
-.countCard {
-  /* color:#4c4e4e; */
-  color: #4c4e4e;
-  /* background-color: #ffcc66; */
-}
 </style>
 
 <script>
-import { getData } from "../../api/data.js";
+import { getuserData } from "../../api/data.js";
 import * as echarts from "echarts";
+// import ChinaMap from "../../src/components/ChinaMap";
 // import { it } from 'node:test'
 
 export default {
-  name: "srcError",
+  name: "userData",
+
   data() {
     return {
       userImg: require("../../src/assets/logo.png"),
       tableData: [],
       tableLabel: {
-        filename: "资源文件名",
-        totalCount: "发生次数",
-        pageCount: "发生页面数",
-        time: "发生时间",
+        userIP: "访问ip",
+        pageLoadTime: "页面加载时长",
+        userAddress: "用户访问地址",
+        sourceType: "访问来源类型",
+        browserType: "浏览器类型",
+        screenMsg: "电脑屏幕信息",
       },
 
       // totalCount:'总发生次数',
@@ -95,35 +87,62 @@ export default {
       // userCount:'影响用户数'
       countData: [
         {
-          name: "总发生次数",
-          value: 23,
+          name: "今日PV",
+          value: 33,
           icon: "el-icon-success",
           color: "#2ec7c9",
         },
         {
-          name: "影响页面次数",
+          name: "今日UV",
           value: 6,
           icon: "el-icon-star-on",
           color: "#ffb980",
         },
         {
-          name: "影响用户数",
+          name: "访问ip数",
           value: 88,
           icon: "el-icon-user",
           color: "#ffb980",
         },
       ],
+      // countData: [],
     };
   },
   mounted() {
-    getData().then((res) => {
+    this.$http
+      .get("http://ygsfhjdym.xyz:5000/api/monitor/getpvuvStatistics")
+      .then((res) => {
+        console.log("hh", res.data[0]);
+        const da = res.data[0];
+        this.countData = [
+          {
+            name: "今日PV",
+            value: da.uv,
+            icon: "el-icon-success",
+            color: "#2ec7c9",
+          },
+          {
+            name: "今日UV",
+            value: da.pv,
+            icon: "el-icon-star-on",
+            color: "#ffb980",
+          },
+          {
+            name: "访问ip数",
+            value: 88,
+            icon: "el-icon-user",
+            color: "#ffb980",
+          },
+        ];
+      });
+    getuserData().then((res) => {
       const { code, data } = res.data;
       if (code === 20000) {
         //表格数据
         this.tableData = data.tableData;
 
         //柱状图
-        const barOption = {
+        const lineOption = {
           legend: {
             //图例文字颜色
             textStyle: {
@@ -140,7 +159,8 @@ export default {
 
           xAxis: {
             type: "category", //类目轴
-            data: data && data.barData && data.barData.map((item) => item.date),
+            data:
+              data && data.lineData && data.lineData.map((item) => item.date),
             axisLine: {
               lineStyle: {
                 color: "#17b3a3",
@@ -165,20 +185,20 @@ export default {
           series: [
             {
               //图注
-              name: "资源异常报错数量",
-              data: data.barData && data.barData.map((item) => item.count),
-              type: "bar",
+              name: "PV",
+              data: data.lineData && data.lineData.map((item) => item.pvCount),
+              type: "line",
             },
             {
               //图注
-              name: "资源异常报错数量",
-              data: data.barData && data.barData.map((item) => item.count),
+              name: "UV",
+              data: data.lineData && data.lineData.map((item) => item.uvCount),
               type: "line",
             },
           ],
         };
-        const U = echarts.init(this.$refs.barEcharts);
-        U.setOption(barOption);
+        const U = echarts.init(this.$refs.lineEcharts);
+        U.setOption(lineOption);
       }
       console.log(res);
     });

@@ -60,32 +60,18 @@
       <span slot="title">性能数据</span>
     </el-menu-item>
 
-    <el-submenu index="4">
-      <template slot="title">
-        <i class="el-icon-document"></i>
-        <span slot="title">Http请求数据</span>
-      </template>
-      <el-menu-item-group>
-        <el-menu-item index="4-1">Http请求</el-menu-item>
-      </el-menu-item-group>
-    </el-submenu>
+    <el-menu-item index="/http">
+      <i class="el-icon-setting"></i>
+      <span slot="title">HTTP请求数据</span>
+    </el-menu-item>
 
-    <el-submenu index="5">
+    <el-menu-item @click="clickMenu2('userData')" index="/userData">
       <template slot="title">
         <i class="el-icon-document"></i>
         <span slot="title">用户行为数据</span>
       </template>
-      <el-menu-item-group>
-        <el-menu-item index="5-1">PV</el-menu-item>
-        <el-menu-item index="5-2">UV</el-menu-item>
-        <el-menu-item index="5-3">页面停留时间</el-menu-item>
-      </el-menu-item-group>
-    </el-submenu>
-
-    <el-menu-item index="/user">
-      <i class="el-icon-setting"></i>
-      <span slot="title">用户管理</span>
     </el-menu-item>
+
     <el-menu-item index="6"> </el-menu-item>
     <el-menu-item index="6"> </el-menu-item>
     <!-- <el-menu-item index="6"> </el-menu-item>
@@ -152,13 +138,6 @@ export default {
               url: "errorData/apiError",
             },
 
-            {
-              path: "/whiteError",
-              name: "whiteError",
-              label: "白屏异常",
-              icon: "setting",
-              url: "errorData/whiteError",
-            },
             {
               path: "/srcError",
               name: "srcError",

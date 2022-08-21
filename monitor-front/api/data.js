@@ -1,13 +1,10 @@
 import axios from "./axios";
 
 
-export const getMenu = (param) => {
+export const getMen = (param) => {
 
     return axios.request({
-        url: '/permission/getMenu',
-        methods: 'post',
-        data: param
-
+        url: '/performance/getMen',
     })
 }
 
@@ -19,7 +16,14 @@ export const getData = () => {
     })
 
 }
+export const getApiData = () => {
+    return axios.request({
+        url: '/apiError/getApiData',
+        methods: 'get',
+        // data: param
+    })
 
+}
 
 export const getPerf = () => {
     return axios.request({
@@ -27,4 +31,16 @@ export const getPerf = () => {
 
     })
 
+}
+export const getuserData = () => {
+    return axios.request({
+        url: '/userData/getuserData'
+
+    })
+}
+export const getbarData = () => {
+    return axios.request({
+        url: '/performance/getbarData'
+
+    })
 }
